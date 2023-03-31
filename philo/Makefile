@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/03/27 16:49:26 by gyoon            ###   ########.fr        #
+#    Updated: 2023/03/31 14:32:10 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,14 @@ RM		= rm -rf
 # **************************************************************************** #
 
 error		= $(addprefix error/,		raise_error.c)
-utils		= $(addprefix utils/,		ft_putstr_fd.c		\
+table		= $(addprefix table/,		set_table_manners.c)
+utils		= $(addprefix utils/,		ft_atoi.c			\
+										ft_putstr_fd.c		\
 										ft_strlen.c)
 main		= main.c
 
 SRCS		= $(addprefix src/,			$(error)		\
+										$(table)		\
 										$(utils)		\
 										$(main))
 OBJS 		= ${SRCS:.c=.o}
