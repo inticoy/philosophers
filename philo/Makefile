@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/03/31 14:32:10 by gyoon            ###   ########.fr        #
+#    Updated: 2023/04/06 14:56:33 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,14 +30,23 @@ RM		= rm -rf
 # **************************************************************************** #
 
 error		= $(addprefix error/,		raise_error.c)
+fork		= $(addprefix fork/,		set_forks.c)
+philo		= $(addprefix philo/,		act_philo.c			\
+										set_philos.c)
 table		= $(addprefix table/,		set_table_manners.c)
+thread		= $(addprefix thread/,		await_threads.c		\
+										create_threads.c	\
+										detach_threads.c)
 utils		= $(addprefix utils/,		ft_atoi.c			\
 										ft_putstr_fd.c		\
 										ft_strlen.c)
 main		= main.c
 
 SRCS		= $(addprefix src/,			$(error)		\
+										$(fork)			\
+										$(philo)		\
 										$(table)		\
+										$(thread)		\
 										$(utils)		\
 										$(main))
 OBJS 		= ${SRCS:.c=.o}
