@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/06 14:59:04 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/06 16:30:13 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILOSOPHERS_H
 
 # include <pthread.h>
+# include <stdio.h>
 
 # ifndef FT_NULL
 #  define FT_NULL 0
@@ -22,6 +23,7 @@
 typedef unsigned long long	t_size;
 typedef int					t_id;
 typedef long long			t_time;
+typedef struct timeval		t_timeval;
 
 enum e_file_descriptor
 {
@@ -65,6 +67,7 @@ typedef struct s_philo
 	t_status		status;
 	t_id			id;
 	int				num_eat;
+	t_time			time_last_eat;
 	t_fork			*left;
 	t_fork			*right;
 	t_manner		*manners;
@@ -97,8 +100,12 @@ void	create_threads(t_table *table);
 void	await_threads(t_table *table);
 void	detach_threads(t_table *table);
 
+//		time
+t_time	get_time(void);
+
 //		utils
 int		ft_atoi(const char *str);
+char	*ft_itoa(int n);
 void	ft_putstr_fd(char *s, int fd);
 t_size	ft_strlen(const char *s);
 

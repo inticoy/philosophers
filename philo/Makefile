@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/04/06 14:56:33 by gyoon            ###   ########.fr        #
+#    Updated: 2023/04/06 16:34:42 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ PHILO	= Dining Philosophers Problem
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
 RM		= rm -rf
 
 # **************************************************************************** #
@@ -37,7 +37,9 @@ table		= $(addprefix table/,		set_table_manners.c)
 thread		= $(addprefix thread/,		await_threads.c		\
 										create_threads.c	\
 										detach_threads.c)
+time		= $(addprefix time/,		get_time.c)
 utils		= $(addprefix utils/,		ft_atoi.c			\
+										ft_itoa.c			\
 										ft_putstr_fd.c		\
 										ft_strlen.c)
 main		= main.c
@@ -47,6 +49,7 @@ SRCS		= $(addprefix src/,			$(error)		\
 										$(philo)		\
 										$(table)		\
 										$(thread)		\
+										$(time)			\
 										$(utils)		\
 										$(main))
 OBJS 		= ${SRCS:.c=.o}

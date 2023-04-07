@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raise_error.c                                      :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 16:37:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/06 15:24:15 by gyoon            ###   ########.fr       */
+/*   Created: 2023/04/06 15:25:44 by gyoon             #+#    #+#             */
+/*   Updated: 2023/04/06 15:36:34 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdlib.h>
+#include <sys/time.h>
 
-void	raise_error(char *msg)
+t_time	get_time(void)
 {
-	ft_putstr_fd(msg, STDERR);
+	t_timeval	tv;
+
+	gettimeofday(&tv, FT_NULL);
+	return (tv.tv_usec / 1000);
 }
