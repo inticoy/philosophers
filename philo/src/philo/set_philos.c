@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:49 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/08 16:19:17 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 02:16:41 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_bool	set_philos(t_table *table)
 		table->philos[i].right = FT_NULL;
 		table->philos[i].manners = &table->manners;
 		table->philos[i].time_start = &table->time_start;
+		table->philos[i].mutex_print = &table->mutex_print;
 		i++;
 	}
 	return (ft_true);

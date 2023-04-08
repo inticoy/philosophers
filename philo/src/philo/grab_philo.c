@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grab_forks.c                                       :+:      :+:    :+:   */
+/*   grab_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:42:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/08 23:33:27 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 02:15:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_bool	grab_right_fork(t_philo *philo)
 	return (ret);
 }
 
-void	grab_forks(t_philo *philo)
+void	grab_philo(t_philo *philo)
 {
 	t_bool	has_left;
 	t_bool	has_right;
@@ -80,6 +80,6 @@ void	grab_forks(t_philo *philo)
 			}
 		}
 	}
-	printf("%lld %d has taken a fork\n", get_time() - *philo->time_start, philo->id);
-	printf("%lld %d has taken a fork\n", get_time() - *philo->time_start, philo->id);
+	print_in_order(philo->mutex_print, *philo->time_start, philo->id, GRAB);
+	print_in_order(philo->mutex_print, *philo->time_start, philo->id, GRAB);
 }

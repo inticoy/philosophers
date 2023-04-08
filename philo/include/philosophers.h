@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/08 19:59:04 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 02:12:36 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct timeval		t_timeval;
 typedef long long			t_time;
 typedef int					t_id;
 
+typedef pthread_mutex_t		t_mutex;
+
 enum e_file_descriptor
 {
 	STDIN = 0,
@@ -39,7 +41,8 @@ typedef enum e_philosopher_status
 	DEAD = 0,
 	EAT = 1,
 	THINK = 2,
-	SLEEP = 3
+	SLEEP = 3,
+	GRAB = 4
 }	t_status;
 
 typedef enum e_bool
@@ -59,21 +62,22 @@ typedef struct s_manner
 
 typedef struct s_fork
 {
-	pthread_mutex_t	mutex;
-	t_id			owner;
+	t_mutex	mutex;
+	t_id	owner;
 }	t_fork;
 
 typedef struct s_philo
 {
-	pthread_mutex_t	mutex;
-	t_status		status;
-	t_id			id;
-	int				num_eat;
-	t_time			time_last_eat;
-	t_fork			*left;
-	t_fork			*right;
-	t_manner		*manners;
-	t_time			*time_start;
+	t_mutex		mutex;
+	t_status	status;
+	t_id		id;
+	int			num_eat;
+	t_time		time_last_eat;
+	t_fork		*left;
+	t_fork		*right;
+	t_manner	*manners;
+	t_time		*time_start;
+	t_mutex		*mutex_print;
 }	t_philo;
 
 typedef struct s_table
@@ -83,6 +87,7 @@ typedef struct s_table
 	pthread_t	*threads;
 	t_philo		*philos;
 	t_fork		*forks;
+	t_mutex		mutex_print;
 }	t_table;
 
 //		admin
@@ -92,12 +97,15 @@ void	*act_admin(void *arg);
 void	raise_error(char *msg);
 
 //		fork
-void	grab_forks(t_philo *philo);
 t_bool	set_forks(t_table *table);
 
-//		philosopher
+//		philo
 void	*act_philo(void *arg);
+void	eat_philo(t_philo *philo);
+void	grab_philo(t_philo *philo);
 t_bool	set_philos(t_table *table);
+void	sleep_philo(t_philo *philo);
+void	think_philo(t_philo *philo);
 
 //		table
 t_bool	set_table_manners(t_table *table, int argc, char **argv);
@@ -111,6 +119,7 @@ void	detach_threads(t_table *table);
 t_time	get_time(void);
 
 //		utils
+void	print_in_order(t_mutex *mutex, t_time start, t_id id, t_status status);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	ft_putstr_fd(char *s, int fd);

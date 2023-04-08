@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/08 18:07:03 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 01:59:05 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 	set_philos(&table);
 	table.threads = (pthread_t *)malloc((table.manners.num_philos + 1) \
 														* sizeof(pthread_t));
+	pthread_mutex_init(&table.mutex_print, FT_NULL);
 	set_forks(&table);
 	create_threads(&table);
 	await_threads(&table);

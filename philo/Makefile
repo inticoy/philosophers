@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/04/08 19:45:34 by gyoon            ###   ########.fr        #
+#    Updated: 2023/04/09 02:12:45 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,16 +32,20 @@ RM		= rm -rf
 
 admin		= $(addprefix admin/,		act_admin.c)
 error		= $(addprefix error/,		raise_error.c)
-fork		= $(addprefix fork/,		grab_forks.c		\
-										set_forks.c)
+fork		= $(addprefix fork/,		set_forks.c)
 philo		= $(addprefix philo/,		act_philo.c			\
-										set_philos.c)
+										eat_philo.c			\
+										grab_philo.c		\
+										set_philos.c		\
+										sleep_philo.c		\
+										think_philo.c)
 table		= $(addprefix table/,		set_table_manners.c)
 thread		= $(addprefix thread/,		await_threads.c		\
 										create_threads.c	\
 										detach_threads.c)
 time		= $(addprefix time/,		get_time.c)
-utils		= $(addprefix utils/,		ft_atoi.c			\
+utils		= $(addprefix utils/,		print_in_order.c	\
+										ft_atoi.c			\
 										ft_itoa.c			\
 										ft_putstr_fd.c		\
 										ft_strlen.c			\
