@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:42:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/08 20:03:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/08 23:33:27 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,22 @@ void	grab_forks(t_philo *philo)
 					continue ;
 			}
 			if (!has_right)
-				grab_right_fork(philo);
-		}	
+			{
+				has_right = grab_right_fork(philo);
+			}
+		}
 		else
 		{
 			if (!has_right)
 			{
-				grab_right_fork(philo);
+				has_right = grab_right_fork(philo);
 				if (!has_right)
 					continue ;
 			}
 			if (!has_left)
-				grab_left_fork(philo);
+			{
+				has_left = grab_left_fork(philo);
+			}
 		}
 	}
 	printf("%lld %d has taken a fork\n", get_time() - *philo->time_start, philo->id);
