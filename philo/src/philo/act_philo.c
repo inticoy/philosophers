@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:45:20 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/08 16:40:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/08 20:04:29 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	eat_philo(t_philo *philo)
 	has_right = ft_false;
 	while (!has_left || !has_right)
 	{
+		usleep(200);
 		if (philo->id % 2 == 0)
 		{
 			if (!has_left)
@@ -34,6 +35,8 @@ static void	eat_philo(t_philo *philo)
 					has_left = ft_true;
 				}
 				pthread_mutex_unlock(&philo->left->mutex);
+				if (!has_left)
+					continue ;
 			}
 			if (!has_right)
 			{
@@ -57,6 +60,8 @@ static void	eat_philo(t_philo *philo)
 					has_right = ft_true;
 				}
 				pthread_mutex_unlock(&philo->right->mutex);
+				if (!has_right)
+					continue ;
 			}
 			if (!has_left)
 			{
@@ -102,6 +107,7 @@ static void	think_philo(t_philo *philo)
 	philo->status = THINK;
 	printf("%lld %d is thinking\n", get_time() - *philo->time_start, philo->id);
 	pthread_mutex_unlock(&philo->mutex);
+	usleep(100);
 }
 
 void	*act_philo(void *arg)
@@ -117,8 +123,10 @@ void	*act_philo(void *arg)
 		if (philo->status != READY)
 			check = ft_true;
 		pthread_mutex_unlock(&philo->mutex);
+		usleep(50);
 	}
-	printf("%lld %d START!!\n", get_time() - *philo->time_start, philo->id);
+	if (philo->id % 2)
+		usleep(50);
 	while (1)
 	{
 		eat_philo(philo);

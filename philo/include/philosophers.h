@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/08 16:27:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/08 19:59:04 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	*act_admin(void *arg);
 void	raise_error(char *msg);
 
 //		fork
+void	grab_forks(t_philo *philo);
 t_bool	set_forks(t_table *table);
 
 //		philosopher

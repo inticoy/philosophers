@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/04/08 16:28:31 by gyoon            ###   ########.fr        #
+#    Updated: 2023/04/08 19:45:34 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ PHILO	= Dining Philosophers Problem
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror
+# -fsanitize=thread -g
 RM		= rm -rf
 
 # **************************************************************************** #
@@ -31,7 +32,8 @@ RM		= rm -rf
 
 admin		= $(addprefix admin/,		act_admin.c)
 error		= $(addprefix error/,		raise_error.c)
-fork		= $(addprefix fork/,		set_forks.c)
+fork		= $(addprefix fork/,		grab_forks.c		\
+										set_forks.c)
 philo		= $(addprefix philo/,		act_philo.c			\
 										set_philos.c)
 table		= $(addprefix table/,		set_table_manners.c)
@@ -90,23 +92,13 @@ version = "mandatory version"
 
 all : $(NAME)
 
-$(NAME) : $(LIBFT) $(MLX) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -I $(INCLUDE) -o $@
+$(NAME) : $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -I $(INCLUDE) -o $@ -lpthread
 	@printf "\rCompiling source files... "
 	@printf "%.$(shell printf "%d" 64)s" $(bar_done)
 	@printf "%7.2f%%\n" 100
 	@printf "🍽️  Now you simulate ${bold}$(PHILO).${end}"
 	@printf " (%s)\n" $(version)
-
-$(LIBFT) :
-	@printf "Build ${bold}[LIBFT]${end}\n"
-	@make -C libft -s
-	@printf "${grn}BUILD SUCCESSFUL${end}\n\n"
-
-$(MLX) :
-	@printf "Build ${bold}[MINILIBX]${end}\n"
-	@make -C minilibx -s
-	@printf "${grn}BUILD SUCCESSFUL${end}\n\n"
 
 %.o : %.c
 	@$(eval cnt=$(shell printf $$(($(cnt)+1))))
