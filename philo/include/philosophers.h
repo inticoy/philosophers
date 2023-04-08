@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/06 16:30:13 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/08 16:27:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 # endif
 
 typedef unsigned long long	t_size;
-typedef int					t_id;
-typedef long long			t_time;
+
 typedef struct timeval		t_timeval;
+typedef long long			t_time;
+typedef int					t_id;
 
 enum e_file_descriptor
 {
@@ -34,6 +35,7 @@ enum e_file_descriptor
 
 typedef enum e_philosopher_status
 {
+	READY = -1,
 	DEAD = 0,
 	EAT = 1,
 	THINK = 2,
@@ -71,6 +73,7 @@ typedef struct s_philo
 	t_fork			*left;
 	t_fork			*right;
 	t_manner		*manners;
+	t_time			*time_start;
 }	t_philo;
 
 typedef struct s_table
@@ -81,6 +84,9 @@ typedef struct s_table
 	t_philo		*philos;
 	t_fork		*forks;
 }	t_table;
+
+//		admin
+void	*act_admin(void *arg);
 
 //		error
 void	raise_error(char *msg);
@@ -108,5 +114,6 @@ int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	ft_putstr_fd(char *s, int fd);
 t_size	ft_strlen(const char *s);
+int		msleep(unsigned int microseconds);
 
 #endif

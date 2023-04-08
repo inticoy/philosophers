@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/07 15:04:32 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/08 16:28:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <pthread.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
@@ -30,6 +30,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	set_philos(&table);
+	table.threads = (pthread_t *)malloc((table.manners.num_philos + 1) \
+														* sizeof(pthread_t));
 	set_forks(&table);
 	table.time_start = get_time();
 	create_threads(&table);

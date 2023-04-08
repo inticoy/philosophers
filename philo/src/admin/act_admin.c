@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_threads.c                                   :+:      :+:    :+:   */
+/*   act_admin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 14:39:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/08 16:39:42 by gyoon            ###   ########.fr       */
+/*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
+/*   Updated: 2023/04/08 16:40:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <pthread.h>
 
-void	create_threads(t_table *table)
+void	*act_admin(void *arg)
 {
-	int	i;
+	t_table	*table;
+	int		i;
 
+	table = (t_table *)arg;
 	i = 0;
 	while (i < table->manners.num_philos)
 	{
-		pthread_create(&table->threads[i + 1], \
-						FT_NULL, \
-						act_philo, \
-						&table->philos[i]);
+		pthread_mutex_lock(&table->philos[i].mutex);
+		table->philos[i].status = THINK;
+		pthread_mutex_unlock(&table->philos[i].mutex);
 		i++;
 	}
-	pthread_create(&table->threads[0], FT_NULL, act_admin, table);
+	return (table);
 }

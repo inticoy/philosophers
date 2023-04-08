@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_threads.c                                   :+:      :+:    :+:   */
+/*   msleep.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 14:39:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/08 16:39:42 by gyoon            ###   ########.fr       */
+/*   Created: 2023/04/07 16:11:27 by gyoon             #+#    #+#             */
+/*   Updated: 2023/04/08 00:55:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <pthread.h>
+#include <unistd.h>
 
-void	create_threads(t_table *table)
+int	msleep(unsigned int microseconds)
 {
-	int	i;
+	t_time	start;
+	int		i;
 
+	start = get_time();
 	i = 0;
-	while (i < table->manners.num_philos)
+	while (i < 1000)
 	{
-		pthread_create(&table->threads[i + 1], \
-						FT_NULL, \
-						act_philo, \
-						&table->philos[i]);
+		if (get_time() - start >= microseconds)
+			break ;
+		usleep(microseconds);
 		i++;
 	}
-	pthread_create(&table->threads[0], FT_NULL, act_admin, table);
+	return (0);
 }
