@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:23:02 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 02:14:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 02:21:55 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	eat_philo(t_philo *philo)
 	pthread_mutex_lock(&philo->mutex);
 	philo->status = EAT;
 	philo->num_eat++;
+	philo->time_last_eat = get_time();
 	pthread_mutex_unlock(&philo->mutex);
 	print_in_order(philo->mutex_print, *philo->time_start, philo->id, EAT);
 	msleep(philo->manners->time_eat);

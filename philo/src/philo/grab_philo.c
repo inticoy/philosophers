@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:42:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 02:15:39 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 02:19:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ void	grab_philo(t_philo *philo)
 					continue ;
 			}
 			if (!has_right)
-			{
 				has_right = grab_right_fork(philo);
-			}
 		}
 		else
 		{
@@ -75,9 +73,7 @@ void	grab_philo(t_philo *philo)
 					continue ;
 			}
 			if (!has_left)
-			{
 				has_left = grab_left_fork(philo);
-			}
 		}
 	}
 	print_in_order(philo->mutex_print, *philo->time_start, philo->id, GRAB);
