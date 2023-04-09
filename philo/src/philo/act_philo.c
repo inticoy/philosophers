@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:45:20 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 11:45:19 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 14:44:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ void	*act_philo(void *arg)
 	wait_philo(philo);
 	while (1)
 	{
-		grab_philo(philo);
-		eat_philo(philo);
-		sleep_philo(philo);
-		think_philo(philo);
+		if (!grab_philo(philo))
+			break ;
+		if (!eat_philo(philo))
+			break ;
+		if (!sleep_philo(philo))
+			break ;
+		if (!think_philo(philo))
+			break ;
 	}
 	return (philo);
 }

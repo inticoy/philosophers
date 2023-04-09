@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:42:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 02:19:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 15:07:54 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_bool	grab_right_fork(t_philo *philo)
 	return (ret);
 }
 
-void	grab_philo(t_philo *philo)
+t_bool	grab_philo(t_philo *philo)
 {
 	t_bool	has_left;
 	t_bool	has_right;
@@ -57,10 +57,14 @@ void	grab_philo(t_philo *philo)
 		{
 			if (!has_left)
 			{
+				if (is_dead_philo(philo))
+					return (ft_false);
 				has_left = grab_left_fork(philo);
 				if (!has_left)
 					continue ;
 			}
+			if (is_dead_philo(philo))
+				return (ft_false);
 			if (!has_right)
 				has_right = grab_right_fork(philo);
 		}
@@ -68,7 +72,11 @@ void	grab_philo(t_philo *philo)
 		{
 			if (!has_right)
 			{
+				if (is_dead_philo(philo))
+					return (ft_false);
 				has_right = grab_right_fork(philo);
+				if (is_dead_philo(philo))
+					return (ft_false);
 				if (!has_right)
 					continue ;
 			}
@@ -76,6 +84,9 @@ void	grab_philo(t_philo *philo)
 				has_left = grab_left_fork(philo);
 		}
 	}
+	if (is_dead_philo(philo))
+		return (ft_false);
 	print_in_order(philo->mutex_print, *philo->time_start, philo->id, GRAB);
 	print_in_order(philo->mutex_print, *philo->time_start, philo->id, GRAB);
+	return (ft_true);
 }

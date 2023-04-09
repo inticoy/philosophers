@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 11:54:31 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 14:39:29 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,12 @@ t_bool	set_forks(t_table *table);
 
 //		philo
 void	*act_philo(void *arg);
-void	eat_philo(t_philo *philo);
-void	grab_philo(t_philo *philo);
+t_bool	eat_philo(t_philo *philo);
+t_bool	grab_philo(t_philo *philo);
+t_bool	is_dead_philo(t_philo *philo);
 t_bool	set_philos(t_table *table);
-void	sleep_philo(t_philo *philo);
-void	think_philo(t_philo *philo);
+t_bool	sleep_philo(t_philo *philo);
+t_bool	think_philo(t_philo *philo);
 
 //		table
 t_bool	set_table_manners(t_table *table, int argc, char **argv);

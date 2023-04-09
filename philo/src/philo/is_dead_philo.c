@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   think_philo.c                                      :+:      :+:    :+:   */
+/*   is_dead_philo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/09 00:27:44 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 14:48:27 by gyoon            ###   ########.fr       */
+/*   Created: 2023/04/09 14:33:30 by gyoon             #+#    #+#             */
+/*   Updated: 2023/04/09 14:33:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <unistd.h>
 
-t_bool	think_philo(t_philo *philo)
+t_bool	is_dead_philo(t_philo *philo)
 {
-	if (is_dead_philo(philo))
-		return (ft_false);
+	t_bool	is_dead;
+
+	is_dead = ft_false;
 	pthread_mutex_lock(&philo->mutex);
-	philo->status = THINK;
+	if (philo->status == DEAD)
+		is_dead = ft_true;
 	pthread_mutex_unlock(&philo->mutex);
-	print_in_order(philo->mutex_print, *philo->time_start, philo->id, THINK);
-	usleep(100);
-	return (ft_true);
+	return (is_dead);
 }

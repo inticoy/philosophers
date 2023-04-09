@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/04/09 11:55:15 by gyoon            ###   ########.fr        #
+#    Updated: 2023/04/09 15:01:18 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ fork		= $(addprefix fork/,		set_forks.c)
 philo		= $(addprefix philo/,		act_philo.c			\
 										eat_philo.c			\
 										grab_philo.c		\
+										is_dead_philo.c		\
 										set_philos.c		\
 										sleep_philo.c		\
 										think_philo.c)
