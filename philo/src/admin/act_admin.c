@@ -6,22 +6,18 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 02:28:07 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 12:13:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <pthread.h>
 
-void	*act_admin(void *arg)
+static void	activate_philo(t_table *table)
 {
-	t_table	*table;
-	int		i;
+	int	i;
 
-	table = (t_table *)arg;
 	i = 0;
-
-	table->time_start = get_time();
 	while (i < table->manners.num_philos)
 	{
 		pthread_mutex_lock(&table->philos[i].mutex);
@@ -29,5 +25,22 @@ void	*act_admin(void *arg)
 		pthread_mutex_unlock(&table->philos[i].mutex);
 		i++;
 	}
+}
+
+static void	monitor_philo(t_table *table)
+{
+	
+}
+
+void	*act_admin(void *arg)
+{
+	t_table	*table;
+	int		i;
+
+	table = (t_table *)arg;
+
+	table->time_start = get_time();
+	activate_philo(table);
+	monitor_philo(table);
 	return (table);
 }
