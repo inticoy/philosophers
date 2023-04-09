@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/04/09 02:12:45 by gyoon            ###   ########.fr        #
+#    Updated: 2023/04/09 11:55:15 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ philo		= $(addprefix philo/,		act_philo.c			\
 table		= $(addprefix table/,		set_table_manners.c)
 thread		= $(addprefix thread/,		await_threads.c		\
 										create_threads.c	\
-										detach_threads.c)
+										detach_threads.c	\
+										set_threads.c)
 time		= $(addprefix time/,		get_time.c)
 utils		= $(addprefix utils/,		print_in_order.c	\
 										ft_atoi.c			\

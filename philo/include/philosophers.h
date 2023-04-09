@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 02:12:36 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/09 11:54:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	think_philo(t_philo *philo);
 t_bool	set_table_manners(t_table *table, int argc, char **argv);
 
 //		thread
+void	set_threads(t_table *table);
 void	create_threads(t_table *table);
 void	await_threads(t_table *table);
 void	detach_threads(t_table *table);
