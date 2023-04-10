@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   think_philo.c                                      :+:      :+:    :+:   */
+/*   set_is_dining.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/09 00:27:44 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/10 17:27:20 by gyoon            ###   ########.fr       */
+/*   Created: 2023/04/10 16:32:34 by gyoon             #+#    #+#             */
+/*   Updated: 2023/04/10 16:33:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <unistd.h>
 
-t_bool	think_philo(t_philo *philo)
+void	set_is_dining(t_table *table, t_bool is_dining)
 {
-	if (!get_is_dining(philo->table))
-		return (ft_false);
-	pthread_mutex_lock(&philo->mutex);
-	philo->status = THINK;
-	pthread_mutex_unlock(&philo->mutex);
-	print_in_order(philo->table, philo->id, THINK);
-	usleep(100);
-	return (ft_true);
+	pthread_mutex_lock(&table->mutex_dining);
+	table->is_dining = is_dining;
+	pthread_mutex_unlock(&table->mutex_dining);
 }

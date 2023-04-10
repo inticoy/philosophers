@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:23:02 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 14:47:44 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/10 17:41:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 
 static void	drop_left_fork(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->left->mutex);
-	philo->left->owner = 0;
-	pthread_mutex_unlock(&philo->left->mutex);
+	pthread_mutex_lock(&philo->left.fork->mutex);
+	philo->left.fork->is_held = ft_false;
+	pthread_mutex_unlock(&philo->left.fork->mutex);
+	philo->left.is_holding = ft_false;
 }
 
 static void	drop_right_fork(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->right->mutex);
-	philo->right->owner = 0;
-	pthread_mutex_unlock(&philo->right->mutex);
+	pthread_mutex_lock(&philo->right.fork->mutex);
+	philo->right.fork->is_held = ft_false;
+	pthread_mutex_unlock(&philo->right.fork->mutex);
+	philo->right.is_holding = ft_false;
 }
 
 t_bool	eat_philo(t_philo *philo)
@@ -33,11 +35,11 @@ t_bool	eat_philo(t_philo *philo)
 		return (ft_false);
 	pthread_mutex_lock(&philo->mutex);
 	philo->status = EAT;
-	philo->num_eat++;
+	philo->eat_count++;
 	philo->time_last_eat = get_time();
 	pthread_mutex_unlock(&philo->mutex);
-	print_in_order(philo->mutex_print, *philo->time_start, philo->id, EAT);
-	msleep(philo->manners->time_eat);
+	print_in_order(philo->table, philo->id, EAT);
+	msleep(philo->table->manners.time_eat);
 	drop_left_fork(philo);
 	drop_right_fork(philo);
 	return (ft_true);

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:45:20 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 14:44:12 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/10 17:33:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	wait_philo(t_philo *philo)
 		usleep(100);
 	}
 	if (philo->id % 2)
-		usleep(200);
+		usleep(500);
 }
 
 void	*act_philo(void *arg)

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/10 16:02:50 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/10 17:27:01 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef int					t_id;
 
 typedef pthread_t			t_pthread;
 typedef pthread_mutex_t		t_mutex;
+
+typedef struct s_table		t_table;
 
 enum e_file_descriptor
 {
@@ -56,8 +58,14 @@ typedef struct s_fork
 {
 	t_mutex	mutex;
 
-	t_id	owner;
+	t_bool	is_held;
 }	t_fork;
+
+typedef struct s_hand
+{
+	t_fork	*fork;
+	t_bool	is_holding;
+}	t_hand;
 
 typedef struct s_philo
 {
@@ -69,8 +77,8 @@ typedef struct s_philo
 	t_status	status;
 	int			eat_count;
 	t_time		time_last_eat;
-	t_fork		*left;
-	t_fork		*right;
+	t_hand		left;
+	t_hand		right;
 }	t_philo;
 
 typedef struct s_manner
@@ -114,7 +122,10 @@ t_bool	sleep_philo(t_philo *philo);
 t_bool	think_philo(t_philo *philo);
 
 //		table
+t_bool	get_is_dining(t_table *table);
+void	set_is_dining(t_table *table, t_bool is_dining);
 t_bool	set_table_manners(t_table *table, int argc, char **argv);
+void	set_table(t_table *table);
 
 //		thread
 void	set_threads(t_table *table);
@@ -126,7 +137,7 @@ void	detach_threads(t_table *table);
 t_time	get_time(void);
 
 //		utils
-void	print_in_order(t_mutex *mutex, t_time start, t_id id, t_status status);
+void	print_in_order(t_table *table, t_id id, t_status status);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	ft_putstr_fd(char *s, int fd);
