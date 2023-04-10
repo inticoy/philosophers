@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/09 14:39:29 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/10 16:02:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct timeval		t_timeval;
 typedef long long			t_time;
 typedef int					t_id;
 
+typedef pthread_t			t_pthread;
 typedef pthread_mutex_t		t_mutex;
 
 enum e_file_descriptor
@@ -51,6 +52,27 @@ typedef enum e_bool
 	ft_true = 1,
 }	t_bool;
 
+typedef struct s_fork
+{
+	t_mutex	mutex;
+
+	t_id	owner;
+}	t_fork;
+
+typedef struct s_philo
+{
+	t_mutex		mutex;
+
+	t_table		*table;
+
+	t_id		id;
+	t_status	status;
+	int			eat_count;
+	t_time		time_last_eat;
+	t_fork		*left;
+	t_fork		*right;
+}	t_philo;
+
 typedef struct s_manner
 {
 	t_time	time_die;
@@ -60,34 +82,17 @@ typedef struct s_manner
 	int		num_philos;
 }	t_manner;
 
-typedef struct s_fork
-{
-	t_mutex	mutex;
-	t_id	owner;
-}	t_fork;
-
-typedef struct s_philo
-{
-	t_mutex		mutex;
-	t_status	status;
-	t_id		id;
-	int			num_eat;
-	t_time		time_last_eat;
-	t_fork		*left;
-	t_fork		*right;
-	t_manner	*manners;
-	t_time		*time_start;
-	t_mutex		*mutex_print;
-}	t_philo;
-
 typedef struct s_table
 {
+	t_mutex		mutex_print;
+	t_mutex		mutex_dining;
+
+	t_bool		is_dining;
 	t_time		time_start;
 	t_manner	manners;
-	pthread_t	*threads;
+	t_pthread	*threads;
 	t_philo		*philos;
 	t_fork		*forks;
-	t_mutex		mutex_print;
 }	t_table;
 
 //		admin
