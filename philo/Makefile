@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/04/10 21:56:28 by gyoon            ###   ########.fr        #
+#    Updated: 2023/04/11 15:18:17 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ PHILO	= Dining Philosophers Problem
 
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
-# -fsanitize=thread -g
 RM		= rm -rf
 
 # **************************************************************************** #
@@ -40,7 +39,8 @@ philo		= $(addprefix philo/,		act_philo.c			\
 										set_philos.c		\
 										sleep_philo.c		\
 										think_philo.c)
-table		= $(addprefix table/,		set_table_manners.c	\
+table		= $(addprefix table/,		del_table.c			\
+										set_table_manners.c	\
 										set_table.c)
 thread		= $(addprefix thread/,		await_threads.c		\
 										create_threads.c	\

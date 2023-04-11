@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/10 17:42:09 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/11 15:10:15 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int	main(int argc, char **argv)
 	set_table(&table);
 	create_threads(&table);
 	await_threads(&table);
+	del_table(&table);
 	return (0);
 }

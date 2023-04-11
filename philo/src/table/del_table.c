@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_threads.c                                   :+:      :+:    :+:   */
+/*   del_table.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 14:39:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:14:17 by gyoon            ###   ########.fr       */
+/*   Created: 2023/04/11 15:10:31 by gyoon             #+#    #+#             */
+/*   Updated: 2023/04/11 15:14:58 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <pthread.h>
+#include <stdlib.h>
 
-void	create_threads(t_table *table)
+void	del_table(t_table *table)
 {
 	int	i;
 
 	i = 0;
+	pthread_mutex_destroy(&table->mutex_print);
 	while (i < table->manners.num_philos)
 	{
-		pthread_create(&table->threads[i], \
-						FT_NULL, \
-						act_philo, \
-						&table->philos[i]);
+		pthread_mutex_destroy(&table->philos[i].mutex);
+		pthread_mutex_destroy(&table->forks[i].mutex);
 		i++;
 	}
-	pthread_create(&table->threads[table->manners.num_philos], \
-					FT_NULL, \
-					act_admin, \
-					table);
+	free(table->philos);
+	free(table->forks);
+	free(table->threads);
 }

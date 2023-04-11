@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/10 22:47:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/11 15:12:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ t_bool	sleep_philo(t_philo *philo);
 t_bool	think_philo(t_philo *philo);
 
 //		table
+void	del_table(t_table *table);
 t_bool	set_table_manners(t_table *table, int argc, char **argv);
 void	set_table(t_table *table);
 
@@ -133,7 +134,7 @@ void	detach_threads(t_table *table);
 t_time	get_time(void);
 
 //		utils
-void	print_in_order(t_table *table, t_time now, t_id id, t_status status);
+void	print_in_order(t_table *table, t_id id, t_status status);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	ft_putstr_fd(char *s, int fd);

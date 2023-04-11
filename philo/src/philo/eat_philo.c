@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:23:02 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/10 22:48:48 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/11 15:17:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ t_bool	eat_philo(t_philo *philo)
 		return (ft_false);
 	pthread_mutex_lock(&philo->mutex);
 	philo->status = EAT;
-	philo->eat_count++;
 	philo->time_last_eat = get_time();
-	print_in_order(philo->table, get_time(), philo->id, EAT);
+	print_in_order(philo->table, philo->id, EAT);
 	pthread_mutex_unlock(&philo->mutex);
+	philo->eat_count++;
 	msleep(philo->table->manners.time_eat);
 	drop_left_fork(philo);
 	drop_right_fork(philo);
