@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:15:35 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/11 15:39:45 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	activate_philo(t_table *table)
 		i++;
 		i++;
 	}
-	usleep(500);
+	usleep(2000);
 	i = 0;
 	while (i < table->manners.num_philos)
 	{

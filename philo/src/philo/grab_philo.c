@@ -6,12 +6,28 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:42:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:04:18 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/11 15:34:59 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <unistd.h>
+
+static void	drop_left_fork(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->left.fork->mutex);
+	philo->left.fork->is_held = ft_false;
+	pthread_mutex_unlock(&philo->left.fork->mutex);
+	philo->left.is_holding = ft_false;
+}
+
+static void	drop_right_fork(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->right.fork->mutex);
+	philo->right.fork->is_held = ft_false;
+	pthread_mutex_unlock(&philo->right.fork->mutex);
+	philo->right.is_holding = ft_false;
+}
 
 static t_bool	grab_left_fork(t_philo *philo)
 {
@@ -67,6 +83,8 @@ t_bool	grab_philo(t_philo *philo)
 				philo->right.is_holding = grab_right_fork(philo);
 			if (philo->right.is_holding)
 				print_in_order(philo->table, philo->id, GRAB);
+			else
+				drop_left_fork(philo);
 		}
 		else
 		{
@@ -86,7 +104,9 @@ t_bool	grab_philo(t_philo *philo)
 			if (!philo->left.is_holding)
 				philo->left.is_holding = grab_left_fork(philo);
 			if (philo->left.is_holding)
-				print_in_order(philo->table, philo->id, GRAB);	
+				print_in_order(philo->table, philo->id, GRAB);
+			else
+				drop_right_fork(philo);	
 		}
 	}
 	if (is_dead_philo(philo))
