@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:42:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:34:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/11 15:55:30 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,13 @@ t_bool	grab_philo(t_philo *philo)
 				philo->left.is_holding = grab_left_fork(philo);
 				if (!philo->left.is_holding)
 					continue ;
-				else
-					print_in_order(philo->table, philo->id, GRAB);
 
 			}
 			if (is_dead_philo(philo))
 				return (ft_false);
 			if (!philo->right.is_holding)
 				philo->right.is_holding = grab_right_fork(philo);
-			if (philo->right.is_holding)
-				print_in_order(philo->table, philo->id, GRAB);
-			else
+			if (!philo->right.is_holding)
 				drop_left_fork(philo);
 		}
 		else
@@ -95,21 +91,18 @@ t_bool	grab_philo(t_philo *philo)
 				philo->right.is_holding = grab_right_fork(philo);
 				if (!philo->right.is_holding)
 					continue ;
-				else
-					print_in_order(philo->table, philo->id, GRAB);
 
 			}
 			if (is_dead_philo(philo))
 				return (ft_false);
 			if (!philo->left.is_holding)
 				philo->left.is_holding = grab_left_fork(philo);
-			if (philo->left.is_holding)
-				print_in_order(philo->table, philo->id, GRAB);
-			else
+			if (!philo->left.is_holding)
 				drop_right_fork(philo);	
 		}
 	}
 	if (is_dead_philo(philo))
 		return (ft_false);
+	print_in_order(philo->table, philo->id, GRAB);
 	return (ft_true);
 }

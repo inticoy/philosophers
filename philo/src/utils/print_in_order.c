@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 02:01:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:00:26 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/11 15:55:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	print_in_order(t_table *table, t_id id, t_status status)
 {
 	pthread_mutex_lock(&table->mutex_print);
 	if (status == GRAB)
+	{
 		printf("%lld %d has taken a fork\n", get_time() - table->time_start, id);
+		printf("%lld %d has taken a fork\n", get_time() - table->time_start, id);
+	}
 	else if (status == EAT)
 		printf("%lld %d is eating\n", get_time() - table->time_start, id);
 	else if (status == SLEEP)
