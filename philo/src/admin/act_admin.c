@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:39:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/14 22:07:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static void	activate_philo(t_table *table)
 
 static void	monitor_philo(t_table *table)
 {
-	t_bool	is_dead;
 	int		i;
+	int		i_dead;
 
-	is_dead = ft_false;
-	while (!is_dead)
+	i_dead = 0;
+	while (i_dead <= 0)
 	{
 		usleep(200);
 		i = 0;
@@ -58,9 +58,7 @@ static void	monitor_philo(t_table *table)
 			if ((get_time() - table->philos[i].time_last_eat) \
 				> table->manners.time_die)
 			{
-				is_dead = ft_true;
-				print_in_order(table, i + 1, DEAD);
-				pthread_mutex_unlock(&table->philos[i].mutex);
+				i_dead = i + 1;
 				break ;
 			}
 			pthread_mutex_unlock(&table->philos[i].mutex);
@@ -70,11 +68,10 @@ static void	monitor_philo(t_table *table)
 	i = 0;
 	while (i < table->manners.num_philos)
 	{
-		pthread_mutex_lock(&table->philos[i].mutex);
 		table->philos[i].status = DEAD;
-		pthread_mutex_unlock(&table->philos[i].mutex);
-		i++;
+		pthread_mutex_unlock(&table->philos[i++].mutex);
 	}
+	print_in_order(table, i, DEAD);
 }
 
 void	*act_admin(void *arg)
