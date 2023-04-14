@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/14 22:07:11 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/14 22:18:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	monitor_philo(t_table *table)
 				> table->manners.time_die)
 			{
 				i_dead = i + 1;
+				pthread_mutex_unlock(&table->philos[i].mutex);
 				break ;
 			}
 			pthread_mutex_unlock(&table->philos[i].mutex);
@@ -68,10 +69,11 @@ static void	monitor_philo(t_table *table)
 	i = 0;
 	while (i < table->manners.num_philos)
 	{
+		pthread_mutex_lock(&table->philos[i].mutex);
 		table->philos[i].status = DEAD;
 		pthread_mutex_unlock(&table->philos[i++].mutex);
 	}
-	print_in_order(table, i, DEAD);
+	print_in_order(table, i_dead, DEAD);
 }
 
 void	*act_admin(void *arg)
