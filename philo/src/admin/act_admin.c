@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/14 22:21:38 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/14 22:22:51 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ static void	activate_philo(t_table *table)
 		table->philos[i].status = THINK;
 		table->philos[i].time_last_eat = table->time_start;
 		pthread_mutex_unlock(&table->philos[i].mutex);
-		i++;
-		i++;
+		i += 2;
 	}
-	usleep(2000);
+	msleep(1);
 	i = 0;
 	while (i < table->manners.num_philos)
 	{
@@ -37,8 +36,7 @@ static void	activate_philo(t_table *table)
 		table->philos[i].status = THINK;
 		table->philos[i].time_last_eat = table->time_start;
 		pthread_mutex_unlock(&table->philos[i].mutex);
-		i++;
-		i++;
+		i += 2;
 	}
 }
 
