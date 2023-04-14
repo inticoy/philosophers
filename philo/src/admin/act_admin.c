@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/14 22:18:16 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/14 22:21:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	monitor_philo(t_table *table)
 	i_dead = 0;
 	while (i_dead <= 0)
 	{
-		usleep(200);
+		usleep(500);
 		i = 0;
 		while (i < table->manners.num_philos)
 		{
