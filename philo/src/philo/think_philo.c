@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:27:44 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 14:12:20 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 14:20:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ t_bool	think_philo(t_philo *philo)
 	philo->status = THINK;
 	print_in_order(philo->table, philo->id, THINK);
 	pthread_mutex_unlock(&philo->mutex);
-	usleep(100);
+	usleep(50);
 	return (ft_true);
 }

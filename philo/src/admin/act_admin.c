@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 13:41:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 14:27:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	activate_philo(t_table *table)
 		table->philos[i].status = THINK;
 		table->philos[i].time_last_eat = table->time_start;
 		pthread_mutex_unlock(&table->philos[i].mutex);
+		print_in_order(table, i + 1, THINK);
 		i += 2;
 	}
 	msleep(1);
@@ -36,6 +37,7 @@ static void	activate_philo(t_table *table)
 		table->philos[i].status = THINK;
 		table->philos[i].time_last_eat = table->time_start;
 		pthread_mutex_unlock(&table->philos[i].mutex);
+		print_in_order(table, i + 1, THINK);
 		i += 2;
 	}
 }

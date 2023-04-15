@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:45:20 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 12:10:20 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 14:25:24 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	wait_philo(t_philo *philo)
 	is_activated = ft_false;
 	while (!is_activated)
 	{
-		usleep(100);
+		usleep(50);
 		pthread_mutex_lock(&philo->mutex);
 		if (philo->status != READY)
 			is_activated = ft_true;
