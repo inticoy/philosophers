@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 17:38:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:41:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ void	set_table(t_table *table);
 void	set_threads(t_table *table);
 void	create_threads(t_table *table);
 void	await_threads(t_table *table);
-void	detach_threads(t_table *table);
 
 //		time
 t_time	get_time(void);
