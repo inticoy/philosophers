@@ -6,11 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:00:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 15:32:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:23:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <pthread.h>
 #include <stdlib.h>
 
 t_bool	set_forks(t_table *table)

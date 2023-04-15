@@ -6,11 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:49 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 15:33:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:21:34 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <pthread.h>
 #include <stdlib.h>
 
 t_bool	set_philos(t_table *table)

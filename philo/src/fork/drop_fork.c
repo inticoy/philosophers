@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   drop_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 16:31:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 17:37:10 by gyoon            ###   ########.fr       */
+/*   Created: 2023/04/15 17:27:42 by gyoon             #+#    #+#             */
+/*   Updated: 2023/04/15 17:28:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <pthread.h>
 
-int	main(int argc, char **argv)
+void	drop_fork(t_philo *philo, t_direction direction)
 {
-	t_table		table;
-
-	if (argc != 5 && argc != 6)
-	{
-		raise_error("usage: ./philo n_philos t_die t_eat t_sleep [n_eat]\n");
-		return (-1);
-	}
-	if (!set_table_manners(&table, argc, argv))
-	{
-		raise_error("error: invalid number for table manners\n");
-		return (-1);
-	}
-	set_table(&table);
-	create_threads(&table);
-	await_threads(&table);
-	del_table(&table);
-	return (0);
+	pthread_mutex_lock(&philo->hands[direction].fork->mutex);
+	philo->hands[direction].fork->is_held = ft_false;
+	pthread_mutex_unlock(&philo->hands[direction].fork->mutex);
+	philo->hands[direction].is_holding = ft_false;
 }

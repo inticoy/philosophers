@@ -6,11 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:10:31 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 15:33:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:19:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <pthread.h>
 #include <stdlib.h>
 
 void	del_table(t_table *table)

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 15:33:48 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:38:37 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 # define PHILOSOPHERS_H
 
 # include <pthread.h>
-# include <stdio.h>
 
 # ifndef FT_NULL
-#  define FT_NULL 0
+#  define FT_NULL (void *)0
 # endif
-
-typedef unsigned long long	t_size;
-
-typedef struct timeval		t_timeval;
-typedef long long			t_time;
-typedef int					t_id;
 
 typedef pthread_t			t_pthread;
 typedef pthread_mutex_t		t_mutex;
+
+typedef unsigned long long	t_size;
+typedef struct timeval		t_timeval;
+typedef long long			t_time;
+typedef int					t_id;
 
 typedef struct s_table		t_table;
 
@@ -78,7 +76,6 @@ typedef struct s_philo
 	t_mutex		mutex;
 
 	t_table		*table;
-
 	t_id		id;
 	t_status	status;
 	int			eat_count;
@@ -114,6 +111,7 @@ void	*act_admin(void *arg);
 void	raise_error(char *msg);
 
 //		fork
+void	drop_fork(t_philo *philo, t_direction direction);
 t_bool	set_forks(t_table *table);
 
 //		philo
@@ -142,7 +140,6 @@ t_time	get_time(void);
 //		utils
 void	print_in_order(t_table *table, t_id id, t_status status);
 int		ft_atoi(const char *str);
-char	*ft_itoa(int n);
 void	ft_putstr_fd(char *s, int fd);
 t_size	ft_strlen(const char *s);
 int		msleep(unsigned int microseconds);

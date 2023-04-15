@@ -6,13 +6,31 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 15:38:06 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:26:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <pthread.h>
 #include <unistd.h>
+
+static void	activate_philo(t_table *table);
+static int	monitor_philo(t_table *table);
+static void	kill_philo(t_table *table);
+
+void	*act_admin(void *arg)
+{
+	t_table	*table;
+	int		i_dead;
+
+	table = (t_table *)arg;
+	activate_philo(table);
+	i_dead = monitor_philo(table);
+	kill_philo(table);
+	if (i_dead > 0)
+		print_in_order(table, i_dead, DEAD);
+	return (FT_NULL);
+}
 
 static void	activate_philo(t_table *table)
 {
@@ -84,18 +102,4 @@ static void	kill_philo(t_table *table)
 		table->philos[i].status = DEAD;
 		pthread_mutex_unlock(&table->philos[i++].mutex);
 	}
-}
-
-void	*act_admin(void *arg)
-{
-	t_table	*table;
-	int		i_dead;
-
-	table = (t_table *)arg;
-	activate_philo(table);
-	i_dead = monitor_philo(table);
-	kill_philo(table);
-	if (i_dead > 0)
-		print_in_order(table, i_dead, DEAD);
-	return (FT_NULL);
 }

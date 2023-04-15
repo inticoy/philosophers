@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:45:20 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 14:52:17 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:27:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-static void	wait_philo(t_philo *philo)
-{
-	t_bool	is_activated;
-
-	is_activated = ft_false;
-	while (!is_activated)
-	{
-		usleep(50);
-		pthread_mutex_lock(&philo->mutex);
-		if (philo->status != READY)
-			is_activated = ft_true;
-		pthread_mutex_unlock(&philo->mutex);
-	}
-}
+static void	wait_philo(t_philo *philo);
 
 void	*act_philo(void *arg)
 {
@@ -47,4 +34,19 @@ void	*act_philo(void *arg)
 			break ;
 	}
 	return (philo);
+}
+
+static void	wait_philo(t_philo *philo)
+{
+	t_bool	is_activated;
+
+	is_activated = ft_false;
+	while (!is_activated)
+	{
+		usleep(50);
+		pthread_mutex_lock(&philo->mutex);
+		if (philo->status != READY)
+			is_activated = ft_true;
+		pthread_mutex_unlock(&philo->mutex);
+	}
 }
