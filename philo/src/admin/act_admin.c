@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 13:31:09 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 13:41:34 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	activate_philo(t_table *table)
 	}
 }
 
-static void	monitor_philo(t_table *table)
+static int	detect_dead_philo(t_table *table)
 {
 	int		i;
 	int		i_dead;
@@ -64,22 +64,33 @@ static void	monitor_philo(t_table *table)
 			i++;
 		}
 	}
+	return (i_dead);
+}
+
+static void	kill_philo(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	while (i < table->manners.num_philos)
+		pthread_mutex_lock(&table->philos[i++].mutex);
 	i = 0;
 	while (i < table->manners.num_philos)
 	{
-		pthread_mutex_lock(&table->philos[i].mutex);
 		table->philos[i].status = DEAD;
 		pthread_mutex_unlock(&table->philos[i++].mutex);
 	}
-	print_in_order(table, i_dead, DEAD);
 }
 
 void	*act_admin(void *arg)
 {
 	t_table	*table;
+	int		i_dead;
 
 	table = (t_table *)arg;
 	activate_philo(table);
-	monitor_philo(table);
+	i_dead = detect_dead_philo(table);
+	kill_philo(table);
+	print_in_order(table, i_dead, DEAD);
 	return (FT_NULL);
 }
