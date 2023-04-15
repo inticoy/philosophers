@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:50:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 15:33:01 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:13:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	await_threads(t_table *table)
 		pthread_join(table->threads[i], FT_NULL);
 		i++;
 	}
+	pthread_join(table->threads[table->manners.num_philos], FT_NULL);
 }
