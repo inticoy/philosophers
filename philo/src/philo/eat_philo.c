@@ -6,27 +6,19 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 00:23:02 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:17:50 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 13:24:43 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <pthread.h>
 
-static void	drop_left_fork(t_philo *philo)
+static void	drop_fork(t_philo *philo, t_direction direction)
 {
-	pthread_mutex_lock(&philo->left.fork->mutex);
-	philo->left.fork->is_held = ft_false;
-	pthread_mutex_unlock(&philo->left.fork->mutex);
-	philo->left.is_holding = ft_false;
-}
-
-static void	drop_right_fork(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->right.fork->mutex);
-	philo->right.fork->is_held = ft_false;
-	pthread_mutex_unlock(&philo->right.fork->mutex);
-	philo->right.is_holding = ft_false;
+	pthread_mutex_lock(&philo->hands[direction].fork->mutex);
+	philo->hands[direction].fork->is_held = ft_false;
+	pthread_mutex_unlock(&philo->hands[direction].fork->mutex);
+	philo->hands[direction].is_holding = ft_false;
 }
 
 t_bool	eat_philo(t_philo *philo)
@@ -40,7 +32,7 @@ t_bool	eat_philo(t_philo *philo)
 	pthread_mutex_unlock(&philo->mutex);
 	philo->eat_count++;
 	msleep(philo->table->manners.time_eat);
-	drop_left_fork(philo);
-	drop_right_fork(philo);
+	drop_fork(philo, LEFT);
+	drop_fork(philo, RIGHT);
 	return (ft_true);
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:49 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:17:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 13:02:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ t_bool	set_philos(t_table *table)
 		table->philos[i].id = i + 1;
 		table->philos[i].eat_count = 0;
 		table->philos[i].time_last_eat = 0;
-		table->philos[i].left.fork = FT_NULL;
-		table->philos[i].left.is_holding = ft_false;
-		table->philos[i].right.fork = FT_NULL;
-		table->philos[i].right.is_holding = ft_false;
+		table->philos[i].hands[0].fork = FT_NULL;
+		table->philos[i].hands[0].is_holding = ft_false;
+		table->philos[i].hands[1].fork = FT_NULL;
+		table->philos[i].hands[1].is_holding = ft_false;
 		i++;
 	}
 	return (ft_true);

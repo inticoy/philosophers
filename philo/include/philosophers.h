@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:12:31 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 13:14:20 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ typedef enum e_bool
 	ft_true = 1,
 }	t_bool;
 
+typedef enum e_direction
+{
+	LEFT = 0,
+	RIGHT = 1
+}	t_direction;
+
 typedef struct s_fork
 {
 	t_mutex	mutex;
@@ -77,8 +83,7 @@ typedef struct s_philo
 	t_status	status;
 	int			eat_count;
 	t_time		time_last_eat;
-	t_hand		left;
-	t_hand		right;
+	t_hand		hands[2];
 }	t_philo;
 
 typedef struct s_manner
