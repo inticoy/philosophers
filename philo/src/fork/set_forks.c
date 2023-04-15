@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:00:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 13:05:29 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 15:32:59 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_bool	set_forks(t_table *table)
 {
-	int			i;
+	int	i;
 
 	table->forks = (t_fork *)malloc(table->manners.num_philos * sizeof(t_fork));
 	if (!table->forks)

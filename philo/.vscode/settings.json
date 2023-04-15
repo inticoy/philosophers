@@ -2,6 +2,7 @@
 	"files.associations": {
 		"pthread.h": "c",
 		"stdio.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"philosophers.h": "c"
 	}
 }

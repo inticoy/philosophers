@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:01:49 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 13:44:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 15:33:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_bool	set_philos(t_table *table)
 {
-	int			i;
+	int	i;
 
 	table->philos = (t_philo *)malloc(table->manners.num_philos \
 														* sizeof(t_philo));

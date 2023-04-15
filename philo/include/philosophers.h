@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 13:14:20 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 15:33:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ typedef struct s_manner
 	t_time	time_die;
 	t_time	time_eat;
 	t_time	time_sleep;
-	int		num_eat;
 	int		num_philos;
+	t_bool	has_num_eat;
+	int		num_eat;
 }	t_manner;
 
 typedef struct s_table

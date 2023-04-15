@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_table_manner.c                                 :+:      :+:    :+:   */
+/*   set_table_manners.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:17:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/06 13:35:13 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 15:31:49 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_bool	validate_table_manners(t_manner manners)
 {
 	if (manners.num_philos > 0 \
-		&& manners.num_eat >= -1 \
+		&& manners.num_eat >= 0 \
 		&& manners.time_die > 0 \
 		&& manners.time_eat > 0 \
 		&& manners.time_sleep > 0)
@@ -31,8 +31,14 @@ t_bool	set_table_manners(t_table *table, int argc, char **argv)
 	table->manners.time_eat = ft_atoi(argv[3]);
 	table->manners.time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
+	{
+		table->manners.has_num_eat = ft_true;
 		table->manners.num_eat = ft_atoi(argv[5]);
+	}
 	else
-		table->manners.num_eat = -1;
+	{
+		table->manners.has_num_eat = ft_false;
+		table->manners.num_eat = 0;
+	}
 	return (validate_table_manners(table->manners));
 }

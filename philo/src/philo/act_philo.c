@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:45:20 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 14:25:24 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 14:52:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*act_philo(void *arg)
 
 	philo = (t_philo *)arg;
 	wait_philo(philo);
-	while (!(philo->eat_count == philo->table->manners.num_eat))
+	while (ft_true)
 	{
 		if (!grab_philo(philo))
 			break ;

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 14:27:17 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 15:32:58 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,19 @@ static void	activate_philo(t_table *table)
 	}
 }
 
-static int	detect_dead_philo(t_table *table)
+static int	monitor_philo(t_table *table)
 {
-	int		i;
-	int		i_dead;
+	int	i;
+	int	i_dead;
+	t_bool	fulfilled;
 
 	i_dead = 0;
-	while (i_dead <= 0)
+	fulfilled = ft_false;
+	while (!fulfilled && i_dead <= 0)
 	{
 		usleep(200);
 		i = 0;
+		fulfilled = ft_true;
 		while (i < table->manners.num_philos)
 		{
 			pthread_mutex_lock(&table->philos[i].mutex);
@@ -62,9 +65,13 @@ static int	detect_dead_philo(t_table *table)
 				pthread_mutex_unlock(&table->philos[i].mutex);
 				break ;
 			}
+			if (table->philos[i].eat_count < table->manners.num_eat)
+				fulfilled = ft_false;
 			pthread_mutex_unlock(&table->philos[i].mutex);
 			i++;
 		}
+		if (!table->manners.has_num_eat)
+			fulfilled = ft_false;
 	}
 	return (i_dead);
 }
@@ -91,8 +98,9 @@ void	*act_admin(void *arg)
 
 	table = (t_table *)arg;
 	activate_philo(table);
-	i_dead = detect_dead_philo(table);
+	i_dead = monitor_philo(table);
 	kill_philo(table);
-	print_in_order(table, i_dead, DEAD);
+	if (i_dead > 0)
+		print_in_order(table, i_dead, DEAD);
 	return (FT_NULL);
 }
