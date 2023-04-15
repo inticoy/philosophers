@@ -6,11 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 02:01:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 15:55:48 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 17:09:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <stdio.h>
 
 void	print_in_order(t_table *table, t_id id, t_status status)
 {
