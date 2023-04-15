@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:16:58 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 15:32:58 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/15 15:38:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ static void	activate_philo(t_table *table)
 
 static int	monitor_philo(t_table *table)
 {
-	int	i;
-	int	i_dead;
+	int		i;
 	t_bool	fulfilled;
 
-	i_dead = 0;
 	fulfilled = ft_false;
-	while (!fulfilled && i_dead <= 0)
+	while (!fulfilled)
 	{
 		usleep(200);
 		i = 0;
@@ -61,19 +59,16 @@ static int	monitor_philo(t_table *table)
 			if ((get_time() - table->philos[i].time_last_eat) \
 				> table->manners.time_die)
 			{
-				i_dead = i + 1;
 				pthread_mutex_unlock(&table->philos[i].mutex);
-				break ;
+				return (i + 1);
 			}
-			if (table->philos[i].eat_count < table->manners.num_eat)
+			if (!table->manners.has_num_eat || \
+				table->philos[i].eat_count < table->manners.num_eat)
 				fulfilled = ft_false;
-			pthread_mutex_unlock(&table->philos[i].mutex);
-			i++;
+			pthread_mutex_unlock(&table->philos[i++].mutex);
 		}
-		if (!table->manners.has_num_eat)
-			fulfilled = ft_false;
 	}
-	return (i_dead);
+	return (0);
 }
 
 static void	kill_philo(t_table *table)
