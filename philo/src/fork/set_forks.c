@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:00:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 17:23:31 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/04/16 13:43:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ t_bool	set_forks(t_table *table)
 		pthread_mutex_init(&table->forks[i].mutex, FT_NULL);
 		table->forks[i].is_held = ft_false;
 		table->philos[i].hands[LEFT].fork = &table->forks[i];
-		if (i == table->manners.num_philos - 1)
-			table->philos[i].hands[RIGHT].fork = &table->forks[0];
-		else
-			table->philos[i].hands[RIGHT].fork = &table->forks[i + 1];
+		table->philos[i].hands[RIGHT].fork = \
+			&table->forks[(i + 1) % table->manners.num_philos];
 		i++;
 	}
 	return (ft_true);
