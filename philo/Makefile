@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/04/15 17:41:27 by gyoon            ###   ########.fr        #
+#    Updated: 2023/05/17 02:24:50 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ thread		= $(addprefix thread/,		await_threads.c		\
 time		= $(addprefix time/,		get_time.c)
 utils		= $(addprefix utils/,		print_in_order.c	\
 										ft_atoi.c			\
+										ft_isdigit.c		\
 										ft_putstr_fd.c		\
 										ft_strlen.c			\
 										msleep.c)

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 17:41:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/17 02:21:24 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,11 @@ void	await_threads(t_table *table);
 t_time	get_time(void);
 
 //		utils
-void	print_in_order(t_table *table, t_id id, t_status status);
 int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
 void	ft_putstr_fd(char *s, int fd);
 t_size	ft_strlen(const char *s);
 int		msleep(unsigned int microseconds);
+void	print_in_order(t_table *table, t_id id, t_status status);
 
 #endif

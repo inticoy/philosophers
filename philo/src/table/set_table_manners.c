@@ -6,11 +6,33 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:17:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/15 15:31:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/17 02:30:29 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+static t_bool	check_arg_digit(int argc, char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (i < argc)
+	{
+		j = 0;
+		if (!argv[i][j])
+			return (ft_false);
+		while (argv[i][j])
+		{
+			if (!ft_isdigit(argv[i][j]))
+				return (ft_false);
+			j++;
+		}
+		i++;
+	}
+	return (ft_true);
+}
 
 static t_bool	validate_table_manners(t_manner manners)
 {
@@ -26,6 +48,8 @@ static t_bool	validate_table_manners(t_manner manners)
 
 t_bool	set_table_manners(t_table *table, int argc, char **argv)
 {
+	if (!check_arg_digit(argc, argv))
+		return (ft_false);
 	table->manners.num_philos = ft_atoi(argv[1]);
 	table->manners.time_die = ft_atoi(argv[2]);
 	table->manners.time_eat = ft_atoi(argv[3]);
