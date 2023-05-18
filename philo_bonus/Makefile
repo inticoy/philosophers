@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/05/18 16:59:55 by gyoon            ###   ########.fr        #
+#    Updated: 2023/05/18 19:51:26 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,41 +29,10 @@ RM		= rm -rf
 #                                                                              #
 # **************************************************************************** #
 
-admin		= $(addprefix admin/,		act_admin.c)
-error		= $(addprefix error/,		raise_error.c)
-fork		= $(addprefix fork/,		drop_fork.c			\
-										set_forks.c)
-philo		= $(addprefix philo/,		act_philo.c			\
-										eat_philo.c			\
-										grab_philo.c		\
-										is_dead_philo.c		\
-										set_philos.c		\
-										sleep_philo.c		\
-										think_philo.c)
-table		= $(addprefix table/,		del_table.c			\
-										set_table_manners.c	\
-										set_table.c)
-thread		= $(addprefix thread/,		await_threads.c		\
-										create_threads.c	\
-										set_threads.c)
-time		= $(addprefix time/,		get_time.c)
-utils		= $(addprefix utils/,		print_in_order.c	\
-										ft_atoi.c			\
-										ft_isdigit.c		\
-										ft_putstr_fd.c		\
-										ft_strlen.c			\
-										msleep.c)
-main		= main.c
 
-SRCS		= $(addprefix src/,			$(admin)	\
-										$(error)	\
-										$(fork)		\
-										$(philo)	\
-										$(table)	\
-										$(thread)	\
-										$(time)		\
-										$(utils)	\
-										$(main))
+SRCS		= $(wildcard	src/*.c	\
+							src/*/*.c	\
+							src/*/*/*.c)
 OBJS 		= ${SRCS:.c=.o}
 INCLUDE		= ./include
 

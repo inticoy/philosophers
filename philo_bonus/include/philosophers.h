@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/17 02:33:16 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/18 19:57:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # endif
 
 typedef pthread_t			t_pthread;
-typedef pthread_mutex_t		t_mutex;
 
 typedef unsigned long long	t_size;
 typedef struct timeval		t_timeval;
@@ -52,37 +51,6 @@ typedef enum e_bool
 	ft_true = 1,
 }	t_bool;
 
-typedef enum e_direction
-{
-	LEFT = 0,
-	RIGHT = 1
-}	t_direction;
-
-typedef struct s_fork
-{
-	t_mutex	mutex;
-
-	t_bool	is_held;
-}	t_fork;
-
-typedef struct s_hand
-{
-	t_fork	*fork;
-	t_bool	is_holding;
-}	t_hand;
-
-typedef struct s_philo
-{
-	t_mutex		mutex;
-
-	t_table		*table;
-	t_id		id;
-	t_status	status;
-	int			eat_count;
-	t_time		time_last_eat;
-	t_hand		hands[2];
-}	t_philo;
-
 typedef struct s_manner
 {
 	t_time	time_die;
@@ -95,13 +63,8 @@ typedef struct s_manner
 
 typedef struct s_table
 {
-	t_mutex		mutex_print;
-
 	t_time		time_start;
 	t_manner	manners;
-	t_pthread	*threads;
-	t_philo		*philos;
-	t_fork		*forks;
 }	t_table;
 
 //		admin
@@ -110,28 +73,8 @@ void	*act_admin(void *arg);
 //		error
 void	raise_error(char *msg);
 
-//		fork
-void	drop_fork(t_philo *philo, t_direction direction);
-t_bool	set_forks(t_table *table);
-
-//		philo
-void	*act_philo(void *arg);
-t_bool	eat_philo(t_philo *philo);
-t_bool	grab_philo(t_philo *philo);
-t_bool	is_dead_philo(t_philo *philo);
-t_bool	set_philos(t_table *table);
-t_bool	sleep_philo(t_philo *philo);
-t_bool	think_philo(t_philo *philo);
-
 //		table
-void	del_table(t_table *table);
 t_bool	set_table_manners(t_table *table, int argc, char **argv);
-void	set_table(t_table *table);
-
-//		thread
-void	set_threads(t_table *table);
-t_bool	create_threads(t_table *table);
-void	await_threads(t_table *table);
 
 //		time
 t_time	get_time(void);

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/17 02:38:55 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/18 19:52:13 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,5 @@ int	main(int argc, char **argv)
 		raise_error("error: invalid number for table manners\n");
 		return (1);
 	}
-	set_table(&table);
-	if (!create_threads(&table))
-	{
-		raise_error("error: fail to create threads\n");
-		return (1);
-	}
-	await_threads(&table);
-	del_table(&table);
 	return (0);
 }
