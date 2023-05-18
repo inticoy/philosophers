@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/18 19:57:39 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/18 20:04:32 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define PHILOSOPHERS_H
 
 # include <pthread.h>
+
+// include temp
+# include <semaphore.h>
+# include <unistd.h>
+# include <stdio.h>
+// include temp
+
 
 # ifndef FT_NULL
 #  define FT_NULL (void *)0
