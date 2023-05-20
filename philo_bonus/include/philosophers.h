@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/18 20:04:32 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/19 17:27:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define PHILOSOPHERS_H
 
 # include <pthread.h>
+# include <unistd.h>
+# include <semaphore.h>
 
 // include temp
-# include <semaphore.h>
 # include <unistd.h>
 # include <stdio.h>
 // include temp
@@ -27,6 +28,8 @@
 # endif
 
 typedef pthread_t			t_pthread;
+typedef pid_t				t_pid;
+typedef sem_t				t_sem;
 
 typedef unsigned long long	t_size;
 typedef struct timeval		t_timeval;
@@ -58,6 +61,13 @@ typedef enum e_bool
 	ft_true = 1,
 }	t_bool;
 
+typedef struct s_philo
+{
+	t_id	id;
+	int		eat_count;
+	t_time	time_last_eat;
+}	t_philo;
+
 typedef struct s_manner
 {
 	t_time	time_die;
@@ -70,18 +80,27 @@ typedef struct s_manner
 
 typedef struct s_table
 {
+	t_sem		*sem_print;
+
 	t_time		time_start;
 	t_manner	manners;
+	t_sem		*forks;
+	t_philo		philo;
 }	t_table;
 
-//		admin
-void	*act_admin(void *arg);
+//		dinner
+void	act_philo(t_table *table);
+void	exec_philo(t_table *table);
+void	*manage_philo(void *arg);
+t_bool	have_dinner(t_table *table);
 
 //		error
 void	raise_error(char *msg);
 
 //		table
+void	del_table(t_table *table);
 t_bool	set_table_manners(t_table *table, int argc, char **argv);
+void	set_table(t_table *table);
 
 //		time
 t_time	get_time(void);
