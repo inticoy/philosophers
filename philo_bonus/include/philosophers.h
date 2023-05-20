@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/19 17:27:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/20 22:21:49 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,12 @@ typedef struct s_table
 	t_time		time_start;
 	t_manner	manners;
 	t_sem		*forks;
+	t_pid		*philos;
 	t_philo		philo;
 }	t_table;
 
 //		dinner
+void	exec_admin(t_table *table);
 void	act_philo(t_table *table);
 void	exec_philo(t_table *table);
 void	*manage_philo(void *arg);

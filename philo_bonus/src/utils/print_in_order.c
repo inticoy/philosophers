@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:19:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/19 23:43:17 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/20 21:41:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	print_in_order(t_table *table, t_id id, t_status status)
 	else if (status == THINK)
 		printf("%lld %d is thinking\n", get_time() - table->time_start, id);
 	else if (status == DEAD)
+	{
 		printf("%lld %d died\n", get_time() - table->time_start, id);
+		return ;
+	}
 	sem_post(table->sem_print);
 }

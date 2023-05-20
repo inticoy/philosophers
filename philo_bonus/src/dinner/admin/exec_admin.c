@@ -1,38 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   have_dinner.c                                      :+:      :+:    :+:   */
+/*   exec_admin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 15:56:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/20 20:52:12 by gyoon            ###   ########.fr       */
+/*   Created: 2023/05/20 20:36:30 by gyoon             #+#    #+#             */
+/*   Updated: 2023/05/20 21:35:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
+#include <sys/wait.h>
 #include "philosophers.h"
-#include <stdlib.h>
 
-t_bool	have_dinner(t_table *table)
+static void	kill_philos(t_table *table);
+void		exec_admin(t_table *table);
+
+void	exec_admin(t_table *table)
 {
-	int		i;
+	int	status;
+	int	i;
 
 	i = 0;
 	while (i < table->manners.num_philos)
 	{
-		table->philos[i] = fork();
-		if (table->philos[i] < 0)
-			return (ft_false);
-		else if (table->philos[i] == 0)
+		usleep(200);
+		waitpid(-1, &status, 0);
+		if (WIFEXITED(status))
 		{
-			table->philo.id = i;
-			break ;
+			if (WEXITSTATUS(status) == 1)
+			{
+				kill_philos(table);
+				return ;
+			}
 		}
 		i++;
 	}
-	if (table->philos[table->philo.id] == 0)
-		exec_philo(table);
-	else
-		exec_admin(table);
-	return (ft_true);
+	return ;
+}
+
+static void	kill_philos(t_table *table)
+{
+	int	i;
+
+	i = 0;
+	printf("kill\n");
+	while (i < table->manners.num_philos)
+		kill(table->philos[i++], SIGKILL);
+	return ;
 }
