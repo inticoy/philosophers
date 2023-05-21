@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/20 22:21:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/21 11:55:01 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ typedef enum e_bool
 
 typedef struct s_philo
 {
+	t_sem	*sem;
+
+	t_pid	pid;
 	t_id	id;
 	int		eat_count;
 	t_time	time_last_eat;
@@ -85,13 +88,13 @@ typedef struct s_table
 	t_time		time_start;
 	t_manner	manners;
 	t_sem		*forks;
-	t_pid		*philos;
-	t_philo		philo;
+	t_philo		*philos;
+	t_id		id;
 }	t_table;
 
 //		dinner
 void	exec_admin(t_table *table);
-void	act_philo(t_table *table);
+void	*act_philo(void *table);
 void	exec_philo(t_table *table);
 void	*manage_philo(void *arg);
 t_bool	have_dinner(t_table *table);
@@ -109,8 +112,10 @@ t_time	get_time(void);
 
 //		utils
 int		ft_atoi(const char *str);
+char	*ft_itoa(int n);
 int		ft_isdigit(int c);
 void	ft_putstr_fd(char *s, int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
 t_size	ft_strlen(const char *s);
 int		msleep(unsigned int microseconds);
 void	print_in_order(t_table *table, t_id id, t_status status);
