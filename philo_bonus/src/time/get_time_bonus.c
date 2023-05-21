@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del_table.c                                        :+:      :+:    :+:   */
+/*   get_time_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 15:02:27 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/21 16:14:09 by gyoon            ###   ########.fr       */
+/*   Created: 2023/04/06 15:25:44 by gyoon             #+#    #+#             */
+/*   Updated: 2023/05/21 17:46:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "philosophers.h"
+#include "philosophers_bonus.h"
+#include <sys/time.h>
 
-void	del_table(t_table *table)
+t_time	get_time(void)
 {
-	sem_close(table->sem_print);
-	sem_close(table->forks);
-	sem_close(table->death);
-	sem_unlink("/sem/print");
-	sem_unlink("/sem/forks");
-	sem_unlink("/sem/death");
-	free(table->philos);
+	t_timeval	tv;
+
+	gettimeofday(&tv, FT_NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }

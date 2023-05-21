@@ -1,12 +1,14 @@
 {
 	"files.associations": {
-		"philosophers.h": "c",
+		"philosophers_bonus.h": "c",
 		"_pthread_types.h": "c",
 		"time.h": "c",
 		"stdlib.h": "c",
 		"wait.h": "c",
 		"_types.h": "c",
 		"__locale": "c",
-		"pthread.h": "c"
+		"pthread.h": "c",
+		"complex": "c",
+		"semaphore.h": "c"
 	}
 }

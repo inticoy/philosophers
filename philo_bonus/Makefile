@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/05/21 16:42:24 by gyoon            ###   ########.fr        #
+#    Updated: 2023/05/21 17:48:54 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ PHILO	= Dining Philosophers Problem
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -fsanitize=thread -g 
+CFLAGS	= -Wall -Wextra -Werror 
+#-fsanitize=thread -g 
 RM		= rm -rf
 
 # **************************************************************************** #
@@ -30,9 +31,26 @@ RM		= rm -rf
 # **************************************************************************** #
 
 
-SRCS		= $(wildcard	src/*.c	\
-							src/*/*.c	\
-							src/*/*/*.c)
+SRCS		= 	src/main_bonus.c \
+				src/dinner/have_dinner_bonus.c \
+				src/error/raise_error_bonus.c \
+				src/table/del_table_bonus.c \
+				src/table/set_table_bonus.c \
+				src/table/set_table_manners_bonus.c \
+				src/time/get_time_bonus.c \
+				src/time/get_timeval_bonus.c \
+				src/utils/ft_atoi_bonus.c \
+				src/utils/ft_isdigit_bonus.c \
+				src/utils/ft_itoa_bonus.c \
+				src/utils/ft_putstr_fd_bonus.c \
+				src/utils/ft_strjoin_bonus.c \
+				src/utils/ft_strlen_bonus.c \
+				src/utils/msleep_bonus.c \
+				src/utils/print_in_order_bonus.c \
+				src/dinner/admin/exec_admin_bonus.c \
+				src/dinner/philo/act_philo_bonus.c \
+				src/dinner/philo/exec_philo_bonus.c \
+				src/dinner/philo/manage_philo_bonus.c
 OBJS 		= ${SRCS:.c=.o}
 INCLUDE		= ./include
 

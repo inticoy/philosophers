@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/20 21:35:10 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/21 17:46:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 int	main(int argc, char **argv)
 {
@@ -30,5 +30,4 @@ int	main(int argc, char **argv)
 	have_dinner(&table);
 	del_table(&table);
 	return (0);
-
 }

@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manage_philo.c                                     :+:      :+:    :+:   */
+/*   have_dinner_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 17:02:53 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/21 16:36:16 by gyoon            ###   ########.fr       */
+/*   Created: 2023/05/19 15:56:40 by gyoon             #+#    #+#             */
+/*   Updated: 2023/05/21 17:46:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 #include <stdlib.h>
 
-void	*manage_philo(void *arg)
+t_bool	have_dinner(t_table *table)
 {
-	t_table	*table;
-	t_time	now;
-	t_time	last;
+	int		i;
 
-	table = (t_table *)arg;
-	while (ft_true)
+	i = 0;
+	while (i < table->manners.num_philos)
 	{
-		usleep(200);
-		sem_wait(table->death);
-		now = get_time();
-		last = (table->philo.time_last_eat.tv_sec * 1000) \
-				+ (table->philo.time_last_eat.tv_usec / 1000);
-		if (now - last > table->manners.time_die)
+		table->philos[i] = fork();
+		if (table->philos[i] < 0)
+			return (ft_false);
+		else if (table->philos[i] == 0)
 		{
-			print_in_order(table, table->philo.id, DEAD);
-			exit(1);
+			table->philo.id = i;
+			break ;
 		}
-		sem_post(table->death);
+		i++;
 	}
+	if (table->philos[table->philo.id] == 0)
+		exec_philo(table);
+	else
+		exec_admin(table);
+	return (ft_true);
 }

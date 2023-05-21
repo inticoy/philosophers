@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_table_manners.c                                :+:      :+:    :+:   */
+/*   set_table_manners_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:17:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/17 02:30:29 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/21 17:46:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 static t_bool	check_arg_digit(int argc, char **argv)
 {

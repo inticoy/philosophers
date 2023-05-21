@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_philo.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 16:56:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/21 16:43:49 by gyoon            ###   ########.fr       */
+/*   Created: 2022/09/07 21:19:51 by gyoon             #+#    #+#             */
+/*   Updated: 2023/05/21 17:46:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
 #include <stdlib.h>
+#include "philosophers_bonus.h"
 
-void	exec_philo(t_table *table)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_pthread	manager;
-	int			errno;
+	const size_t	slen1 = ft_strlen(s1);
+	const size_t	slen2 = ft_strlen(s2);
+	char			*ret;
+	size_t			i;
 
-	table->philo.id++;
-	if (table->philo.id % 2 == 1)
-		usleep(200);
-	errno = pthread_create(&manager, NULL, manage_philo, table);
-	if (errno)
-		exit(1);
-	act_philo(table);
-	exit(0);
+	ret = (char *)malloc(sizeof(char) * (slen1 + slen2 + 1));
+	if (!ret)
+		return (0);
+	i = 0;
+	while (i < slen1)
+		ret[i++] = *s1++;
+	while (i < slen1 + slen2)
+		ret[i++] = *s2++;
+	ret[i] = 0;
+	return (ret);
 }

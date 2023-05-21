@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   get_timeval_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 16:38:34 by gyoon             #+#    #+#             */
-/*   Updated: 2023/03/27 16:46:30 by gyoon            ###   ########.fr       */
+/*   Created: 2023/05/21 16:37:54 by gyoon             #+#    #+#             */
+/*   Updated: 2023/05/21 17:46:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-#include <unistd.h>
+#include <sys/time.h>
+#include "philosophers_bonus.h"
 
-void	ft_putstr_fd(char *s, int fd)
+t_timeval	get_timeval(void)
 {
-	write(fd, s, ft_strlen(s));
+	t_timeval	tv;
+
+	gettimeofday(&tv, FT_NULL);
+	return (tv);
 }

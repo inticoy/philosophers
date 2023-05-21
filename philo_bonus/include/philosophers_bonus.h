@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philosophers_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 16:31:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/21 16:47:51 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/21 17:50:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILOSOPHERS_BONUS_H
+# define PHILOSOPHERS_BONUS_H
 
 # include <pthread.h>
 # include <unistd.h>
 # include <semaphore.h>
-
-// include temp
-# include <unistd.h>
-# include <stdio.h>
-// include temp
-
 
 # ifndef FT_NULL
 #  define FT_NULL (void *)0
@@ -85,7 +79,7 @@ typedef struct s_table
 	t_time		time_start;
 	t_manner	manners;
 	t_sem		*forks;
-	t_sem		*death;
+	t_sem		**times;
 	t_pid		*philos;
 	t_philo		philo;
 }	t_table;
@@ -112,8 +106,10 @@ t_timeval	get_timeval(void);
 //			utils
 int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
+char		*ft_itoa(int n);
 void		ft_putstr_fd(char *s, int fd);
 t_size		ft_strlen(const char *s);
+char		*ft_strjoin(char const *s1, char const *s2);
 int			msleep(unsigned int microseconds);
 void		print_in_order(t_table *table, t_id id, t_status status);
 

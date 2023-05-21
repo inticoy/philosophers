@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msleep.c                                           :+:      :+:    :+:   */
+/*   ft_strlen_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/07 16:11:27 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/11 16:12:05 by gyoon            ###   ########.fr       */
+/*   Created: 2023/03/27 16:38:36 by gyoon             #+#    #+#             */
+/*   Updated: 2023/05/21 17:46:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-#include <unistd.h>
+#include "philosophers_bonus.h"
 
-int	msleep(unsigned int microseconds)
+t_size	ft_strlen(const char *s)
 {
-	t_time	start;
-	int		i;
+	t_size	len;
 
-	start = get_time();
-	i = 0;
-	while (i < 1000)
-	{
-		if (get_time() - start >= microseconds)
-			break ;
-		usleep(microseconds);
-		i++;
-	}
-	return (0);
+	len = 0;
+	while (s[len] != '\0')
+		len++;
+	return (len);
 }

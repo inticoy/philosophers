@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raise_error.c                                      :+:      :+:    :+:   */
+/*   msleep_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 16:37:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/04/06 15:24:15 by gyoon            ###   ########.fr       */
+/*   Created: 2023/04/07 16:11:27 by gyoon             #+#    #+#             */
+/*   Updated: 2023/05/21 17:46:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-#include <stdlib.h>
+#include "philosophers_bonus.h"
+#include <unistd.h>
 
-void	raise_error(char *msg)
+int	msleep(unsigned int microseconds)
 {
-	ft_putstr_fd(msg, STDERR);
+	t_time	start;
+	int		i;
+
+	start = get_time();
+	i = 0;
+	while (i < 1000)
+	{
+		if (get_time() - start >= microseconds)
+			break ;
+		usleep(microseconds);
+		i++;
+	}
+	return (0);
 }
