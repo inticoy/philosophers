@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:05:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/20 22:21:56 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/05/21 16:37:52 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ static void	grab_philo(t_table *table)
 static void	eat_philo(t_table *table)
 {
 	print_in_order(table, table->philo.id, EAT);
+	sem_wait(table->death);
 	table->philo.eat_count++;
-	table->philo.time_last_eat = get_time();
+	table->philo.time_last_eat = get_timeval();
+	sem_post(table->death);
 	msleep(table->manners.time_eat);
 	sem_post(table->forks);
 	sem_post(table->forks);

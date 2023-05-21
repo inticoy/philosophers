@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_philo.c                                       :+:      :+:    :+:   */
+/*   get_timeval.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 16:56:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/05/21 16:43:49 by gyoon            ###   ########.fr       */
+/*   Created: 2023/05/21 16:37:54 by gyoon             #+#    #+#             */
+/*   Updated: 2023/05/21 16:38:27 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/time.h>
 #include "philosophers.h"
-#include <stdlib.h>
 
-void	exec_philo(t_table *table)
+t_timeval	get_timeval(void)
 {
-	t_pthread	manager;
-	int			errno;
+	t_timeval	tv;
 
-	table->philo.id++;
-	if (table->philo.id % 2 == 1)
-		usleep(200);
-	errno = pthread_create(&manager, NULL, manage_philo, table);
-	if (errno)
-		exit(1);
-	act_philo(table);
-	exit(0);
+	gettimeofday(&tv, FT_NULL);
+	return (tv);
 }

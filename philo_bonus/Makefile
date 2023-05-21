@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/05/20 22:22:38 by gyoon            ###   ########.fr        #
+#    Updated: 2023/05/21 16:42:24 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ PHILO	= Dining Philosophers Problem
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror #  -fsanitize=thread -g 
+CFLAGS	= -Wall -Wextra -Werror -fsanitize=thread -g 
 RM		= rm -rf
 
 # **************************************************************************** #
